@@ -42,7 +42,7 @@ int main() {
     std::cout << "Enter a message: ";
     std::getline(std::cin, message);
 
-    if (clientSocket.sendTo(message.c_str(), message.size(), SERVER_IP, SERVER_PORT) < 0) {
+    if (clientSocket.sendTo(message.c_str(), static_cast<const int>(message.size()), SERVER_IP, SERVER_PORT) < 0) {
         std::cerr << "Failed to send message." << std::endl;
         return 1;
     }
