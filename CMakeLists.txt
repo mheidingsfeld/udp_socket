@@ -10,3 +10,12 @@ target_compile_options(example PRIVATE
          -Wall>
     $<$<CXX_COMPILER_ID:MSVC>:
          /W4>)
+
+add_executable(loopback
+    src/loopback.cpp
+    src/udp_socket.cpp)
+target_compile_options(example PRIVATE
+    $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
+         -Wall>
+    $<$<CXX_COMPILER_ID:MSVC>:
+         /W4>)
