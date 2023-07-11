@@ -60,7 +60,7 @@ int UDPSocket::sendTo(const char* buffer, const int buffer_size, const std::stri
     }
 
     return sendto(sockfd_, buffer, buffer_size, 0,
-                    reinterpret_cast<SOCKADDR*>(&dest_addr), sizeof(dest_addr));
+                  reinterpret_cast<SOCKADDR*>(&dest_addr), sizeof(dest_addr));
 }
 
 int UDPSocket::receiveFrom(char* buffer, int buffer_size, std::string& sender_ip, unsigned int& sender_port) {
@@ -68,15 +68,13 @@ int UDPSocket::receiveFrom(char* buffer, int buffer_size, std::string& sender_ip
     socklen_t sender_addr_len = sizeof(sender_addr);
 
     int recv_bytes = recvfrom(sockfd_, buffer, buffer_size - 1, 0,
-                                    reinterpret_cast<SOCKADDR*>(&sender_addr), &sender_addr_len);
+                              reinterpret_cast<SOCKADDR*>(&sender_addr), &sender_addr_len);
     if (recv_bytes >= 0) {
         buffer[recv_bytes] = '\0';
-        char ipBuffer[INET_ADDRSTRLEN];
-        inet_ntop(AF_INET, &(sender_addr.sin_addr), ipBuffer, INET_ADDRSTRLEN);
-        sender_ip = ipBuffer;
+        char ip_buffer[INET_ADDRSTRLEN];
+        inet_ntop(AF_INET, &(sender_addr.sin_addr), ip_buffer, INET_ADDRSTRLEN);
+        sender_ip = ip_buffer;
         sender_port = ntohs(sender_addr.sin_port);
-        //sender_ip = inet_ntoa(sender_addr.sin_addr);
-        //sender_port = ntohs(sender_addr.sin_port);
     }
     return recv_bytes;
 }
