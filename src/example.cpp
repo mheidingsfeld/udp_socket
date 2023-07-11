@@ -2,6 +2,11 @@
 
 #include <iostream>
 
+#ifdef _WIN32
+    #include <winsock2.h>
+    #pragma comment(lib, "ws2_32.lib")
+#endif
+
 
 #define SERVER_IP "127.0.0.1"
 #define SERVER_PORT 8888
@@ -46,7 +51,7 @@ int main() {
     std::string sender_ip;
     unsigned int sender_port;
 
-    ssize_t recvBytes = serverSocket.receiveFrom(buffer, sizeof(buffer), sender_ip, sender_port);
+    int recvBytes = serverSocket.receiveFrom(buffer, sizeof(buffer), sender_ip, sender_port);
     if (recvBytes < 0) {
         std::cerr << "Failed to receive message." << std::endl;
         return 1;
