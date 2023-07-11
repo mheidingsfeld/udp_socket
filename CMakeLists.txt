@@ -3,9 +3,9 @@ project(udp_socket VERSION 0.0.1 LANGUAGES CXX)
 
 include_directories(include)
 add_executable(simple
-    example/simple.cpp
+    examples/simple.cpp
     src/udp_socket.cpp)
-target_compile_options(example PRIVATE
+target_compile_options(simple PRIVATE
     $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
          -Wall>
     $<$<CXX_COMPILER_ID:MSVC>:
@@ -14,7 +14,7 @@ target_compile_options(example PRIVATE
 add_executable(loopback
     examples/loopback.cpp
     src/udp_socket.cpp)
-target_compile_options(example PRIVATE
+target_compile_options(loopback PRIVATE
     $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
          -Wall>
     $<$<CXX_COMPILER_ID:MSVC>:
