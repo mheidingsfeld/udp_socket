@@ -2,11 +2,6 @@
 
 #include <iostream>
 
-#ifdef _WIN32
-    #include <winsock2.h>
-    #pragma comment(lib, "ws2_32.lib")
-#endif
-
 
 #define SERVER_IP "127.0.0.1"
 #define SERVER_PORT 8888
