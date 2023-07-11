@@ -14,7 +14,7 @@
     typedef struct sockaddr SOCKADDR;
 #endif
 
-bool udp_socket_startup() {
+bool udpSocketStartup() {
 #ifdef _WIN32
     WSADATA wsa_data;
     if (WSAStartup(MAKEWORD(2, 2), &wsa_data) != 0) {
@@ -25,7 +25,7 @@ bool udp_socket_startup() {
 }
 
 
-void udp_socket_cleanup() {
+void udpSocketCleanup() {
 #ifdef _WIN32
     WSACleanup();
 #endif

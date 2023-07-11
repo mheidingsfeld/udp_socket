@@ -16,7 +16,7 @@ void signalHandler(int signum) {
 
 
 int main() {
-    if(!udp_socket_startup()) {
+    if(!udpSocketStartup()) {
         std::cerr << "Failed to initialize winsock." << std::endl;
         return 1;        
     }
@@ -66,7 +66,7 @@ int main() {
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
 
-    udp_socket_cleanup();
+    udpSocketCleanup();
 
     return 0;
 }

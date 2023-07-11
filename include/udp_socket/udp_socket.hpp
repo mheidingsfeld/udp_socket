@@ -11,16 +11,16 @@
 #endif
 
 /**
- * @brief Startup the socket. Does nothing on UNIX-like systems.
+ * @brief Startup Windows sockets. Does nothing on UNIX-like systems.
  * @return true if the startup is successful, false otherwise. 
  */
-bool udp_socket_startup();
+bool udpSocketStartup();
 
 
 /**
- * @brief Cleanup the socket. Does nothing on UNIX-like systems.
+ * @brief Cleanup Windows sockets. Does nothing on UNIX-like systems.
  */
-void udp_socket_cleanup();
+void udpSocketCleanup();
 
 
 /**
