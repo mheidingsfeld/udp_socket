@@ -9,26 +9,26 @@
 
 int main() {
 #ifdef _WIN32
-    WSADATA wsaData;
-    if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
+    WSADATA wsa_data;
+    if (WSAStartup(MAKEWORD(2, 2), &wsa_data) != 0) {
         std::cerr << "Failed to initialize winsock." << std::endl;
         return 1;
     }
 #endif
 
-    UDPSocket clientSocket;
-    if (!clientSocket.create()) {
+    UDPSocket client_socket;
+    if (!client_socket.create()) {
         std::cerr << "Failed to create socket." << std::endl;
         return 1;
     }
 
-    UDPSocket serverSocket;
-    if (!serverSocket.create()) {
+    UDPSocket server_socket;
+    if (!server_socket.create()) {
         std::cerr << "Failed to create socket." << std::endl;
         return 1;
     }
 
-    if (!serverSocket.bind(SERVER_PORT)) {
+    if (!server_socket.bind(SERVER_PORT)) {
         std::cerr << "Failed to bind socket." << std::endl;
         return 1;
     }
@@ -37,7 +37,7 @@ int main() {
     std::cout << "Enter a message: ";
     std::getline(std::cin, message);
 
-    if (clientSocket.sendTo(message.c_str(), static_cast<const int>(message.size()), SERVER_IP, SERVER_PORT) < 0) {
+    if (client_socket.sendTo(message.c_str(), static_cast<const int>(message.size()), SERVER_IP, SERVER_PORT) < 0) {
         std::cerr << "Failed to send message." << std::endl;
         return 1;
     }
@@ -46,8 +46,8 @@ int main() {
     std::string sender_ip;
     unsigned int sender_port;
 
-    int recvBytes = serverSocket.receiveFrom(buffer, sizeof(buffer), sender_ip, sender_port);
-    if (recvBytes < 0) {
+    int recv_bytes = server_socket.receiveFrom(buffer, sizeof(buffer), sender_ip, sender_port);
+    if (recv_bytes < 0) {
         std::cerr << "Failed to receive message." << std::endl;
         return 1;
     }
