@@ -11,6 +11,19 @@
 #endif
 
 /**
+ * @brief Startup the socket. Does nothing on UNIX-like systems.
+ * @return true if the startup is successful, false otherwise. 
+ */
+bool udp_socket_startup();
+
+
+/**
+ * @brief Cleanup the socket. Does nothing on UNIX-like systems.
+ */
+void udp_socket_cleanup();
+
+
+/**
  * @class UDPSocket
  * @brief Represents a UDP socket.
  */

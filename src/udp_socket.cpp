@@ -14,6 +14,23 @@
     typedef struct sockaddr SOCKADDR;
 #endif
 
+bool udp_socket_startup() {
+#ifdef _WIN32
+    WSADATA wsa_data;
+    if (WSAStartup(MAKEWORD(2, 2), &wsa_data) != 0) {
+        return false;
+    }
+#endif
+    return true;    
+}
+
+
+void udp_socket_cleanup() {
+#ifdef _WIN32
+    WSACleanup();
+#endif
+}
+
 
 UDPSocket::UDPSocket() : sockfd_(INVALID_SOCKET) {}
 

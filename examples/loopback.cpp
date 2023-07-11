@@ -16,13 +16,10 @@ void signalHandler(int signum) {
 
 
 int main() {
-#ifdef _WIN32
-    WSADATA wsa_data;
-    if (WSAStartup(MAKEWORD(2, 2), &wsa_data) != 0) {
+    if(!udp_socket_startup()) {
         std::cerr << "Failed to initialize winsock." << std::endl;
-        return 1;
+        return 1;        
     }
-#endif
 
     // Register signal handler
     signal(SIGINT, signalHandler);
@@ -69,9 +66,7 @@ int main() {
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
 
-#ifdef _WIN32
-    WSACleanup();
-#endif
+    udp_socket_cleanup();
 
     return 0;
 }

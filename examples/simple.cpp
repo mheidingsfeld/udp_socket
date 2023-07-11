@@ -8,13 +8,10 @@
 
 
 int main() {
-#ifdef _WIN32
-    WSADATA wsa_data;
-    if (WSAStartup(MAKEWORD(2, 2), &wsa_data) != 0) {
+    if(!udp_socket_startup()) {
         std::cerr << "Failed to initialize winsock." << std::endl;
-        return 1;
+        return 1;        
     }
-#endif
 
     UDPSocket client_socket;
     if (!client_socket.create()) {
@@ -54,9 +51,7 @@ int main() {
 
     std::cout << "Received message from " << sender_ip << ":" << sender_port << ": " << buffer << std::endl;
 
-#ifdef _WIN32
-    WSACleanup();
-#endif
+    udp_socket_cleanup();
 
     return 0;
 }
