@@ -1,4 +1,7 @@
-.vs/**
 .vscode/**
-out/**
 build/**
+CMakeUserPresets.json
+conan.lock
+conanbuildinfo.txt
+conaninfo.txt
+graph_info.json
