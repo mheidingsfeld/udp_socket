@@ -78,6 +78,8 @@ public:
     void close();
 private:
     SOCKET sockfd_; /**< The socket file descriptor. */
+
+    void makeNonBlocking();
 };
 
 #endif // UDP_SOCKET_HPP_

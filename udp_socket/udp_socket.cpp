@@ -5,6 +5,7 @@
 typedef int socklen_t;
 #else
     #include <arpa/inet.h>
+    #include <fcntl.h>
     #include <netinet/in.h>
     #include <sys/socket.h>
     #include <unistd.h>
@@ -36,6 +37,8 @@ UDPSocket::~UDPSocket() { close(); }
 
 bool UDPSocket::create() {
     sockfd_ = socket(AF_INET, SOCK_DGRAM, 0);
+    makeNonBlocking();
+
     return (sockfd_ != INVALID_SOCKET);
 }
 
@@ -85,4 +88,14 @@ void UDPSocket::close() {
 #endif
         sockfd_ = INVALID_SOCKET;
     }
+}
+
+void UDPSocket::makeNonBlocking() {
+#if defined(_WIN32) || defined(_WIN64)
+    u_long mode = 1;
+    ioctlsocket(sockfd_, FIONBIO, &mode);
+#else
+    int flags = fcntl(sockfd_, F_GETFL, 0);
+    fcntl(sockfd_, F_SETFL, flags | O_NONBLOCK);
+#endif
 }
