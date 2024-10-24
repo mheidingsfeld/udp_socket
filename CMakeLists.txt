@@ -13,7 +13,7 @@ endif()
 
 # Dependencies
 
-# Build instructions
+# Build library
 add_library(${PROJECT_NAME})
 target_sources(${PROJECT_NAME}
     PRIVATE
@@ -27,33 +27,6 @@ target_link_libraries(${PROJECT_NAME}
     PRIVATE
     )
 
-# Build example: Simple
-add_executable(simple)
-target_sources(simple
-    PRIVATE
-        ${CMAKE_CURRENT_LIST_DIR}/examples/simple.cpp
-    )
-target_include_directories(simple
-    PRIVATE
-        ${PROJECT_SOURCE_DIR}
-    )    
-target_link_libraries(simple 
-    PRIVATE 
-        ${PROJECT_NAME}
-    )
-
-# Build example: Loopback
-add_executable(loopback)
-target_sources(loopback
-    PRIVATE
-        ${CMAKE_CURRENT_LIST_DIR}/examples/loopback.cpp
-    )
-target_include_directories(loopback
-    PRIVATE
-        ${PROJECT_SOURCE_DIR}
-    )    
-target_link_libraries(loopback 
-    PRIVATE 
-        ${PROJECT_NAME}
-    )   
+# Build examples
+add_subdirectory(examples)
 
